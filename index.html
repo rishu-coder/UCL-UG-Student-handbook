@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UCL CEGE – Undergraduate Programme Manual 2025–26</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- ================= EMBEDDED CSS ================= -->
+  <style>
+  /*
+  ══════════════════════════════════════════════════════════
+  UCL CEGE — Undergraduate Programme Manual 2025–26
+  Stylesheet · styles.css
+  ══════════════════════════════════════════════════════════
+  Table of contents:
+    1. CSS Variables
+    2. Reset & Base
+    3. Typography
+    4. Top Navigation
+    5. Hero Banner
+    6. Search Bar & Results
+    7. Layout (Sidebar + Content)
+    8. Sidebar / Table of Contents
+    9. Main Content Sections
+   10. Tables
+   11. Info Boxes
+   12. Staff Cards
+   13. Year Grids & Module tables
+   14. Honours Grid
+   15. Charter Grid
+   16. Content Footer
+   17. Scrollbar & misc
+   18. Responsive (Tablet)
+   19. Responsive (Mobile)
+   20. Search Highlight
+   21. Animations
+  ══════════════════════════════════════════════════════════
+*/
+
+/* ══════════════════════════════════════════════════════════
+   1. CSS VARIABLES
+══════════════════════════════════════════════════════════ */
+:root {
+  /* Brand colours */
+  --ucl-dark:      #1a0830;
+  --ucl-purple:    #500778;
+  --ucl-mid:       #7b2d8b;
+  --ucl-bright:    #a855f7;
+  --ucl-light:     #c084e8;
+  --ucl-pale:      #f3e8ff;
+
+  /* UI colours */
+  --white:         #ffffff;
+  --off-white:     #faf8ff;
+  --surface:       #f7f5fc;
+  --border:        rgba(80, 7, 120, 0.1);
+  --border-mid:    rgba(80, 7, 120, 0.18);
+
+  /* Text */
+  --text-dark:     #1a0830;
+  --text-body:     #2e1a40;
+  --text-mid:      #5a3e72;
+  --text-muted:    #8b6ea0;
+  --text-link:     #500778;
+
+  /* Status colours */
+  --warn-bg:       #fff8ed;
+  --warn-border:   #f59e0b;
+  --green-bg:      #f0fdf4;
+  --green-border:  #22c55e;
+
+  /* Shadows */
+  --shadow-sm:     0 1px 8px rgba(80,7,120,0.08);
+  --shadow-md:     0 4px 24px rgba(80,7,120,0.12);
+
+  /* Layout */
+  --nav-h:         60px;
+  --sidebar-w:     270px;
+  --content-max:   860px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. RESET & BASE
+══════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 20px);
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  color: var(--text-body);
+  background: var(--off-white);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: underline;
+  text-decoration-color: rgba(80,7,120,0.3);
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+a:hover {
+  color: var(--ucl-bright);
+  text-decoration-color: var(--ucl-bright);
+}
+
+ul, ol { padding-left: 1.4em; }
+li { margin-bottom: 0.4em; }
+img { display: block; max-width: 100%; }
+code {
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 0.82em;
+  background: var(--ucl-pale);
+  color: var(--ucl-purple);
+  padding: 1px 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(80,7,120,0.15);
+}
+
+/* ══════════════════════════════════════════════════════════
+   3. TYPOGRAPHY
+══════════════════════════════════════════════════════════ */
+.section-h1 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.section-h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.2;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.section-lead {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--text-mid);
+  margin-bottom: 24px;
+  line-height: 1.65;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ucl-mid);
+  background: var(--ucl-pale);
+  padding: 3px 10px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin: 28px 0 10px;
+  line-height: 1.3;
+}
+h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ucl-purple);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 20px 0 8px;
+}
+
+p { line-height: 1.75; margin-bottom: 14px; }
+p:last-child { margin-bottom: 0; }
+
+/* ══════════════════════════════════════════════════════════
+   4. TOP NAVIGATION
+══════════════════════════════════════════════════════════ */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--ucl-dark);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+}
+
+.topnav__inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: var(--nav-h);
+}
+
+/* Logo */
+.topnav__logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.ucl-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+/* Keep old rules for any fallback */
+.logo-mark { display: none; }
+.logo-text { display: none; }
+
+/* Desktop nav links */
+.topnav__links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-left: 8px;
+}
+.topnav__links a {
+  padding: 6px 13px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
+}
+.topnav__links a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
+
+/* Search */
+.search-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.search-wrap input[type="search"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  padding: 7px 32px 7px 34px;
+  width: 220px;
+  outline: none;
+  transition: background 0.2s, border-color 0.2s, width 0.25s;
+}
+.search-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+.search-wrap input:focus {
+  background: rgba(255,255,255,0.14);
+  border-color: var(--ucl-light);
+  width: 280px;
+}
+.search-icon {
+  position: absolute;
+  left: 9px;
+  width: 14px;
+  height: 14px;
+  color: rgba(255,255,255,0.4);
+  pointer-events: none;
+}
+.search-clear {
+  position: absolute;
+  right: 6px;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+}
+.search-clear:hover { color: white; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+  transition: transform 0.28s, opacity 0.28s;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav drawer */
+.mobile-nav {
+  background: #120620;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 8px 0 16px;
+}
+.mobile-nav a {
+  display: block;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.15s, color 0.15s;
+}
+.mobile-nav a:hover { background: rgba(255,255,255,0.05); color: white; }
+.mobile-search {
+  padding: 12px 20px 4px;
+}
+.mobile-search input {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+}
+.mobile-search input::placeholder { color: rgba(255,255,255,0.4); }
+
+/* ══════════════════════════════════════════════════════════
+   5. HERO BANNER
+══════════════════════════════════════════════════════════ */
+.hero {
+  background: linear-gradient(130deg, var(--ucl-dark) 0%, var(--ucl-purple) 50%, var(--ucl-mid) 100%);
+  color: var(--white);
+  padding: 52px 24px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 65% 90% at 85% 110%, rgba(168,85,247,0.2), transparent 55%);
+  pointer-events: none;
+}
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.hero__kicker {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero__kicker::before { content: ''; width: 20px; height: 2px; background: rgba(255,255,255,0.4); }
+.hero__title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.hero__sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.72);
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.hero__badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  backdrop-filter: blur(4px);
+}
+
+/* ══════════════════════════════════════════════════════════
+   6. SEARCH RESULTS BAR
+══════════════════════════════════════════════════════════ */
+.search-results-bar {
+  background: var(--ucl-pale);
+  border-bottom: 2px solid var(--ucl-purple);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--ucl-purple);
+  font-weight: 500;
+}
+.search-results-bar button {
+  background: var(--ucl-purple);
+  color: white;
+  border: none;
+  padding: 4px 14px;
+  border-radius: 3px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════════
+   7. LAYOUT
+══════════════════════════════════════════════════════════ */
+.layout {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ══════════════════════════════════════════════════════════
+   8. SIDEBAR / TABLE OF CONTENTS
+══════════════════════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: #1d0835;
+  color: rgba(255,255,255,0.7);
+  min-height: calc(100vh - var(--nav-h));
+  position: sticky;
+  top: var(--nav-h);
+  height: calc(100vh - var(--nav-h));
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168,85,247,0.3) transparent;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.3); border-radius: 2px; }
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  flex-shrink: 0;
+}
+.sidebar-toggle-mobile {
+  display: none;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.toc { flex: 1; padding: 10px 0 20px; }
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.toc-item.toc-top > a {
+  display: block;
+  flex: 1;
+  padding: 8px 18px;
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  border-left: 2px solid transparent;
+  line-height: 1.3;
+}
+.toc-item.toc-top > a:hover {
+  color: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.05);
+  border-left-color: var(--ucl-light);
+}
+.toc-item.active > a {
+  color: var(--ucl-light) !important;
+  background: rgba(168,85,247,0.12) !important;
+  border-left-color: var(--ucl-light) !important;
+}
+
+.toc-expand {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 0.7rem;
+  line-height: 1;
+  transition: color 0.15s, transform 0.2s;
+  flex-shrink: 0;
+}
+.toc-expand:hover { color: rgba(255,255,255,0.7); }
+.toc-expand.expanded { transform: rotate(90deg); color: var(--ucl-light); }
+
+.toc-children {
+  display: none;
+  flex-direction: column;
+  background: rgba(0,0,0,0.15);
+  border-left: 1px solid rgba(255,255,255,0.05);
+  margin-left: 18px;
+}
+.toc-children.open { display: flex; }
+
+.toc-child {
+  display: block;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  border-left: 2px solid transparent;
+}
+.toc-child:hover {
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.04);
+  border-left-color: rgba(168,85,247,0.5);
+}
+.toc-child.active {
+  color: var(--ucl-light) !important;
+  border-left-color: var(--ucl-light) !important;
+}
+
+.sidebar__footer {
+  padding: 14px 18px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.sidebar__footer a {
+  font-size: 0.74rem;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.sidebar__footer a:hover { color: var(--ucl-light); }
+
+/* Open button (mobile) */
+.sidebar-open-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 16px;
+  z-index: 110;
+  background: var(--ucl-purple);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(80,7,120,0.4);
+  align-items: center;
+  gap: 7px;
+  transition: background 0.2s;
+}
+.sidebar-open-btn:hover { background: var(--ucl-mid); }
+.sidebar-open-btn svg { flex-shrink: 0; }
+
+/* Overlay */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,2,20,0.6);
+  z-index: 105;
+}
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* mobile sidebar handled in main responsive block below */
+
+/* ══════════════════════════════════════════════════════════
+   9. MAIN CONTENT SECTIONS
+══════════════════════════════════════════════════════════ */
+.content {
+  flex: 1;
+  min-width: 0;
+  background: var(--white);
+  border-left: 1px solid var(--border);
+}
+
+.manual-section {
+  padding: 48px 52px 40px;
+  max-width: calc(var(--content-max) + 104px);
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--ucl-pale), transparent);
+  margin: 0 52px;
+}
+
+/* Link list (key info) */
+.link-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.link-list li {
+  padding: 12px 16px;
+  background: var(--surface);
+  border-left: 3px solid var(--ucl-purple);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   10. TABLES
+══════════════════════════════════════════════════════════ */
+.table-wrap {
+  overflow-x: auto;
+  margin: 20px 0 24px;
+  border: 1px solid var(--border-mid);
+  border-radius: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  min-width: 420px;
+}
+
+thead {
+  background: linear-gradient(135deg, var(--ucl-dark) 0%, var(--ucl-purple) 100%);
+  color: var(--white);
+}
+thead th {
+  padding: 11px 14px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--ucl-pale); }
+tbody tr:nth-child(even) { background: var(--surface); }
+tbody tr:nth-child(even):hover { background: var(--ucl-pale); }
+
+td {
+  padding: 10px 14px;
+  vertical-align: top;
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
+/* Year overview table (coloured per year) */
+.year-table thead th:nth-child(1) { background: #3b1a6e; }
+.year-table thead th:nth-child(2) { background: #500778; }
+.year-table thead th:nth-child(3) { background: #7b2d8b; }
+.year-table thead th:nth-child(4) { background: #a855f7; }
+
+/* ══════════════════════════════════════════════════════════
+   11. INFO BOXES
+══════════════════════════════════════════════════════════ */
+.info-box {
+  margin: 16px 0;
+  padding: 14px 16px;
+  background: var(--ucl-pale);
+  border-left: 4px solid var(--ucl-purple);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+.info-box--purple {
+  background: var(--ucl-pale);
+  border-left-color: var(--ucl-purple);
+}
+.info-box--warning {
+  background: var(--warn-bg);
+  border-left-color: var(--warn-border);
+}
+.info-box--green {
+  background: var(--green-bg);
+  border-left-color: var(--green-border);
+}
+
+/* ══════════════════════════════════════════════════════════
+   12. STAFF CARDS
+══════════════════════════════════════════════════════════ */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 20px 0 24px;
+}
+.staff-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.staff-card:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--ucl-light);
+}
+.staff-card__initials {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ucl-purple), var(--ucl-bright));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Instrument Serif', serif;
+  font-size: 1rem;
+  color: white;
+  flex-shrink: 0;
+}
+.staff-card__name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.staff-card__role {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+.staff-card p { margin: 0; }
+
+/* ══════════════════════════════════════════════════════════
+   13. HONOURS GRID
+══════════════════════════════════════════════════════════ */
+.honours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 20px 0 24px;
+}
+.honours-card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  text-align: center;
+}
+.honours-card__band {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.honours-card__pct {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.honours-card p {
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+  margin: 0;
+}
+.honours-card--gold   { background: #fffbeb; border-color: #fbbf24; }
+.honours-card--gold   .honours-card__band { color: #92400e; }
+.honours-card--silver { background: #f9fafb; border-color: #9ca3af; }
+.honours-card--silver .honours-card__band { color: #374151; }
+.honours-card--bronze { background: #fff7ed; border-color: #f97316; }
+.honours-card--bronze .honours-card__band { color: #9a3412; }
+.honours-card--grey   { background: #f3f4f6; border-color: #d1d5db; }
+.honours-card--grey   .honours-card__band { color: #6b7280; }
+
+/* ══════════════════════════════════════════════════════════
+   14. CHARTER GRID
+══════════════════════════════════════════════════════════ */
+.charter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+.charter-card {
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.charter-card--right {
+  background: var(--ucl-pale);
+  border-color: rgba(80,7,120,0.2);
+}
+.charter-card h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+}
+.charter-card ul {
+  font-size: 0.87rem;
+  line-height: 1.6;
+}
+.charter-card li { margin-bottom: 6px; }
+
+/* ══════════════════════════════════════════════════════════
+   15. CONTENT FOOTER
+══════════════════════════════════════════════════════════ */
+.content-footer {
+  background: var(--ucl-dark);
+  color: rgba(255,255,255,0.55);
+  padding: 32px 52px;
+  margin-top: 40px;
+}
+.content-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.content-footer a {
+  color: var(--ucl-light);
+  text-decoration: none;
+}
+.content-footer a:hover { color: white; }
+
+/* ══════════════════════════════════════════════════════════
+   16. SEARCH HIGHLIGHT
+══════════════════════════════════════════════════════════ */
+mark.search-highlight {
+  background: #fef08a;
+  color: var(--text-dark);
+  border-radius: 2px;
+  padding: 0 2px;
+  font-style: normal;
+}
+
+/* ══════════════════════════════════════════════════════════
+   17. SCROLLBAR
+══════════════════════════════════════════════════════════ */
+.content::-webkit-scrollbar { width: 6px; }
+.content::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
+
+/* ══════════════════════════════════════════════════════════
+   18. ANIMATIONS
+══════════════════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero__kicker { animation: fadeUp 0.45s ease 0.05s both; }
+.hero__title  { animation: fadeUp 0.55s ease 0.15s both; }
+.hero__sub    { animation: fadeUp 0.55s ease 0.25s both; }
+.hero__badges { animation: fadeUp 0.55s ease 0.35s both; }
+
+/* ══════════════════════════════════════════════════════════
+   19. RESPONSIVE — TABLET (max 1100px)
+══════════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  :root { --sidebar-w: 230px; }
+
+  .manual-section { padding: 36px 36px 32px; }
+  .section-divider { margin: 0 36px; }
+  .content-footer  { padding: 28px 36px; }
+
+  .topnav__links { display: none; }
+  .search-wrap input[type="search"] { width: 180px; }
+  .search-wrap input:focus { width: 220px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   20. RESPONSIVE — MOBILE (max 768px)
+══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root { --nav-h: 54px; }
+
+  /* Nav */
+  .hamburger { display: flex; }
+  .search-wrap { display: none; } /* search is in mobile drawer */
+
+  /* Hero */
+  .hero { padding: 36px 18px 40px; }
+
+  /* Layout: stack, hide sidebar */
+  .layout { flex-direction: column; }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    max-width: 300px;
+    height: 100%;
+    z-index: 300;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+  .sidebar.mobile-open {
+    left: 0;
+  }
+  .sidebar-toggle-mobile { display: block; }
+  .sidebar-open-btn { display: flex; }
+  /* Content full width */
+  .content { border-left: none; }
+
+  /* Sections */
+  .manual-section { padding: 28px 18px 24px; }
+  .section-divider { margin: 0 18px; }
+  .content-footer  { padding: 24px 18px; }
+  .content-footer__inner { flex-direction: column; gap: 12px; }
+
+  /* Staff grid */
+  .staff-grid { grid-template-columns: 1fr; }
+
+  /* Charter grid */
+  .charter-grid { grid-template-columns: 1fr; }
+
+  /* Honours grid */
+  .honours-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Tables */
+  table { min-width: 500px; }
+
+  /* Search bar in top nav hidden on mobile, use drawer */
+}
+
+  </style>
+</head>
+
+<body>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+  <!-- ════════════════════════════════════════════════
+       TOP NAVIGATION BAR
+  ════════════════════════════════════════════════ -->
+  <header class="topnav" role="banner">
+    <div class="topnav__inner">
+      <!-- Logo -->
+      <a class="topnav__logo" href="#top" aria-label="UCL Home">
+        <img src="data:image/png;base64,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5aspASZVANbAAAAAAIgAAAAAAAAAADIAMAAAAAAAAyADAACQAAAAAAAAAAAAAAAAAAAAAAAAAAACkBgABFUAyKQGwVAIpAAACIAAAJAACkBJlUA1sAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAKQEmVQDWwAAAAACIAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAApASZVANbAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAACkBJlUA1sAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAKQEmVQDWwAAAAACIAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAApASZVANbAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAACkBJlUA1sAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAKQEmVQDWwAAAAACIAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAApASZVANbAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAACkBJlUA1sAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAKQEmVQDWwAAAAACIAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAApASZVANbAAAAD/2Q==" alt="UCL 200" class="ucl-logo-img" />
+      </a>
+
+      <!-- Desktop global nav -->
+      <nav class="topnav__links" aria-label="Global navigation">
+        <a href="#sec-1">Study</a>
+        <a href="#sec-5">Teaching</a>
+        <a href="#sec-6">Support</a>
+        <a href="#sec-8">Professionalism</a>
+        <a href="#sec-9">Marks</a>
+        <a href="#sec-3">People</a>
+        <a href="#top">About</a>
+      </nav>
+
+      <!-- Search bar -->
+      <div class="search-wrap">
+        <input type="search" id="searchInput" placeholder="Search manual…" aria-label="Search manual content" autocomplete="off" />
+        <button class="search-clear" id="searchClear" aria-label="Clear search" hidden>✕</button>
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      </div>
+
+      <!-- Hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav drawer -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="#sec-1">Study</a>
+      <a href="#sec-5">Teaching</a>
+      <a href="#sec-6">Support</a>
+      <a href="#sec-8">Professionalism</a>
+      <a href="#sec-9">Marks</a>
+      <a href="#sec-3">People</a>
+      <div class="mobile-search">
+        <input type="search" id="mobileSearch" placeholder="Search manual…" aria-label="Search manual on mobile" autocomplete="off" />
+      </div>
+    </nav>
+  </header>
+
+  <!-- ════════════════════════════════════════════════
+       HERO BANNER
+  ════════════════════════════════════════════════ -->
+  <div class="hero" id="top">
+    <div class="hero__inner">
+      <div class="hero__kicker">UCL Civil, Environmental &amp; Geomatic Engineering</div>
+      <h1 class="hero__title">Undergraduate Programme Manual</h1>
+      <p class="hero__sub">2025–2026 · BEng Civil Engineering &amp; MEng Civil Engineering</p>
+      <div class="hero__badges">
+        <span class="badge">JBM Accredited</span>
+        <span class="badge">BEng · MEng</span>
+        <span class="badge">2025–26</span>
+      </div>
+    </div>
+    <!-- decorative grid overlay -->
+    <div class="hero__grid" aria-hidden="true"></div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       SEARCH RESULTS BANNER (hidden by default)
+  ════════════════════════════════════════════════ -->
+  <div class="search-results-bar" id="searchResultsBar" hidden>
+    <span id="searchResultsText"></span>
+    <button id="searchResultsClose" aria-label="Clear search">Clear</button>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       MAIN LAYOUT: SIDEBAR + CONTENT
+  ════════════════════════════════════════════════ -->
+  <div class="layout" id="layout">
+
+    <!-- ── SIDEBAR (Table of Contents) ── -->
+    <aside class="sidebar" id="sidebar" aria-label="Table of contents">
+      <div class="sidebar__header">
+        <span>Contents</span>
+        <button class="sidebar-toggle-mobile" id="sidebarToggleMobile" aria-label="Close contents">✕</button>
+      </div>
+
+      <nav class="toc" id="toc" aria-label="Section navigation">
+
+        <div class="toc-item toc-top" data-target="sec-intro">
+          <a href="#sec-intro">Introduction</a>
+        </div>
+
+        <div class="toc-item toc-top" data-target="sec-1">
+          <a href="#sec-1">1. Introduction</a>
+        </div>
+
+        <div class="toc-item toc-top" data-target="sec-2">
+          <a href="#sec-2">2. Being a Civil Engineer</a>
+        </div>
+
+        <div class="toc-item toc-top has-children" data-target="sec-3">
+          <a href="#sec-3">3. Key Staff</a>
+          <button class="toc-expand" aria-expanded="false" aria-label="Expand section 3">▸</button>
+        </div>
+        <div class="toc-children">
+          <a class="toc-child" href="#sec-3-1">3.1 Professional Services</a>
+          <a class="toc-child" href="#sec-3-2">3.2 Faculty Staff</a>
+        </div>
+
+        <div class="toc-item toc-top has-children" data-target="sec-4">
+          <a href="#sec-4">4. Programme Overview</a>
+          <button class="toc-expand" aria-expanded="false" aria-label="Expand section 4">▸</button>
+        </div>
+        <div class="toc-children">
+          <a class="toc-child" href="#sec-4-1">4.1 BEng / MEng (Civil)</a>
+          <a class="toc-child" href="#sec-4-2">4.2 MEng International</a>
+          <a class="toc-child" href="#sec-4-3">4.3 Year in Industry</a>
+          <a class="toc-child" href="#sec-4-4">4.4 Change of Programme</a>
+          <a class="toc-child" href="#sec-4-5a">4.5 Prizes</a>
+          <a class="toc-child" href="#sec-4-5b">4.5 Rules for Progression</a>
+          <a class="toc-child" href="#sec-4-6">4.6 Non-Condonable Modules</a>
+          <a class="toc-child" href="#sec-4-7">4.7 Honours Classification</a>
+          <a class="toc-child" href="#sec-4-8">4.8 Interim Qualifications</a>
+        </div>
+
+        <div class="toc-item toc-top has-children" data-target="sec-5">
+          <a href="#sec-5">5. Teaching &amp; Learning</a>
+          <button class="toc-expand" aria-expanded="false" aria-label="Expand section 5">▸</button>
+        </div>
+        <div class="toc-children">
+          <a class="toc-child" href="#sec-5-1">5.1 Structure of Programme</a>
+          <a class="toc-child" href="#sec-5-2">5.2 Attendance Requirements</a>
+          <a class="toc-child" href="#sec-5-3">5.3 Workload &amp; Time Management</a>
+          <a class="toc-child" href="#sec-5-4">5.4 Extra-Curricular Activities</a>
+        </div>
+
+        <div class="toc-item toc-top has-children" data-target="sec-6">
+          <a href="#sec-6">6. Academic &amp; Personal Support</a>
+          <button class="toc-expand" aria-expanded="false" aria-label="Expand section 6">▸</button>
+        </div>
+        <div class="toc-children">
+          <a class="toc-child" href="#sec-6-1">6.1 UG Pastoral Tutor</a>
+          <a class="toc-child" href="#sec-6-2">6.2 Student Adviser</a>
+          <a class="toc-child" href="#sec-6-3">6.3 Personal Tutorials</a>
+          <a class="toc-child" href="#sec-6-4">6.4 Additional Maths</a>
+          <a class="toc-child" href="#sec-6-5">6.5 Additional English</a>
+          <a class="toc-child" href="#sec-6-6">6.6 Transition Mentors</a>
+          <a class="toc-child" href="#sec-6-7">6.7 Academic Issues</a>
+          <a class="toc-child" href="#sec-6-8">6.8 Personal Issues</a>
+        </div>
+
+        <div class="toc-item toc-top" data-target="sec-7">
+          <a href="#sec-7">7. Field Courses</a>
+        </div>
+
+        <div class="toc-item toc-top has-children" data-target="sec-8">
+          <a href="#sec-8">8. Professionalism</a>
+          <button class="toc-expand" aria-expanded="false" aria-label="Expand section 8">▸</button>
+        </div>
+        <div class="toc-children">
+          <a class="toc-child" href="#sec-8-1">8.1 Professional Charter</a>
+          <a class="toc-child" href="#sec-8-2">8.2 Your Future Career</a>
+          <a class="toc-child" href="#sec-8-3">8.3 Becoming a Chartered Engineer</a>
+          <a class="toc-child" href="#sec-8-4">8.4 Professional Institutions</a>
+        </div>
+
+        <div class="toc-item toc-top has-children" data-target="sec-9">
+          <a href="#sec-9">9. Understanding Your Marks</a>
+          <button class="toc-expand" aria-expanded="false" aria-label="Expand section 9">▸</button>
+        </div>
+        <div class="toc-children">
+          <a class="toc-child" href="#sec-9-1">9.1 Honours Degree</a>
+          <a class="toc-child" href="#sec-9-2">9.2 BA, BSc, MEng or what?</a>
+          <a class="toc-child" href="#sec-9-3">9.3 Assessment at UCL</a>
+          <a class="toc-child" href="#sec-9-4">9.4 What is your assessor looking for?</a>
+          <a class="toc-child" href="#sec-9-5">9.5 Your UCL Transcript</a>
+          <a class="toc-child" href="#sec-9-6">9.6 HEAR</a>
+          <a class="toc-child" href="#sec-9-7">9.7 Award of Honours Classes</a>
+          <a class="toc-child" href="#sec-9-8">9.8 International Equivalencies</a>
+        </div>
+
+      </nav>
+
+      <!-- Mobile overlay trigger -->
+      <div class="sidebar__footer">
+        <a href="https://www.ucl.ac.uk/civil-environmental-geomatic-engineering/study/undergraduate" target="_blank" rel="noopener">CEGE Undergraduate Website ↗</a>
+      </div>
+    </aside>
+
+    <!-- Mobile sidebar toggle button -->
+    <button class="sidebar-open-btn" id="sidebarOpenBtn" aria-label="Open table of contents">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="16" y2="12"/><line x1="3" y1="18" x2="12" y2="18"/></svg>
+      Contents
+    </button>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+    <!-- ═══════════════════════════════════════════
+         MAIN CONTENT
+    ═══════════════════════════════════════════ -->
+    <main class="content" id="mainContent" role="main">
+
+      <!-- ─── SECTION: Cover / Introduction ─── -->
+      <section class="manual-section" id="sec-intro">
+        <div class="section-label">Overview</div>
+        <h1 class="section-h1">Civil, Environmental &amp; Geomatic Engineering</h1>
+        <p class="section-lead">Undergraduate Programme Manual 2025–2026</p>
+
+        <div class="info-box info-box--purple">
+          <strong>Important:</strong> This manual is a guide to the BEng/MEng Engineering (Civil) programmes specifically written for students starting their BEng/MEng in Civil Engineering in 2025–26. It is important that you read it carefully, and refer back to it when needed. This manual should be read in partnership with the <strong>CEGE Student General Departmental Manual</strong> and the <strong>UCL Academic Manual</strong>.
+        </div>
+
+        <h3>Key Online Information</h3>
+        <ul class="link-list">
+          <li><strong>UCL CEGE Website – Undergraduate Programmes</strong><br><a href="https://www.ucl.ac.uk/civil-environmental-geomatic-engineering/study/undergraduate" target="_blank" rel="noopener">www.ucl.ac.uk/civil-environmental-geomatic-engineering/study/undergraduate</a></li>
+          <li><strong>CEGE Student Intranet</strong><br><a href="https://sharepoint.com" target="_blank" rel="noopener">CEGE.Student Intranet – Home (sharepoint.com)</a></li>
+          <li><strong>UCL Academic Manual</strong><br><a href="https://www.ucl.ac.uk/srs/academic-manual/overview" target="_blank" rel="noopener">www.ucl.ac.uk/srs/academic-manual/overview</a></li>
+          <li><strong>UCL Website – Current Students</strong><br><a href="https://www.ucl.ac.uk/students/" target="_blank" rel="noopener">www.ucl.ac.uk/students/</a></li>
+        </ul>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 1: Introduction ─── -->
+      <section class="manual-section" id="sec-1">
+        <div class="section-label">Section 1</div>
+        <h2 class="section-h2">1. Introduction</h2>
+
+        <p>Welcome to UCL Civil, Environmental and Geomatic Engineering (CEGE).</p>
+        <p>This manual is a guide to the BEng/MEng Engineering (Civil) programmes specifically written for students starting their BEng/MEng in Civil Engineering in 2025–26. It is important that you read it carefully, and refer back to it when needed. This manual should be read in partnership with the <strong>CEGE Student General Departmental Manual</strong> (found on the UCL CEGE Student Intranet site) and the UCL Academic Manual at <a href="https://www.ucl.ac.uk/academic-manual/" target="_blank" rel="noopener">www.ucl.ac.uk/academic-manual/</a>. All academic regulations, policies and procedures are in the UCL Academic Manual. These documents contain key information for your understanding and successful completion of your education at UCL.</p>
+        <p>This manual provides programme-specific information and can be accessed on the CEGE Student Intranet site.</p>
+
+        <h3>Key Online Information</h3>
+        <ul>
+          <li>UCL CEGE Website – Undergraduate Programmes: <a href="https://www.ucl.ac.uk/civil-environmental-geomatic-engineering/study/undergraduate" target="_blank" rel="noopener">www.ucl.ac.uk/civil-environmental-geomatic-engineering/study/undergraduate</a></li>
+          <li>CEGE Student Intranet: CEGE.Student Intranet – Home (sharepoint.com)</li>
+          <li>UCL Academic Manual: <a href="https://www.ucl.ac.uk/srs/academic-manual/overview" target="_blank" rel="noopener">www.ucl.ac.uk/srs/academic-manual/overview</a></li>
+          <li>UCL Website – Current Students: <a href="https://www.ucl.ac.uk/students/" target="_blank" rel="noopener">www.ucl.ac.uk/students/</a></li>
+        </ul>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 2: Being a Civil Engineer ─── -->
+      <section class="manual-section" id="sec-2">
+        <div class="section-label">Section 2</div>
+        <h2 class="section-h2">2. Being a Civil Engineer</h2>
+
+        <p>Civil engineering is the art and practice of changing the physical world for the use and benefit of people. It is one of the oldest professions in the world, borne of people's enduring relationship with their environment and the need to sustain and improve life. Within the context of our complex and diverse world in the 21st Century, it is achieved with a rich social, cultural and technological heritage.</p>
+
+        <p>As every person is different, so is every civil engineer. As an individual you can play your part in designing and building bridges, skyscrapers, flood defences, water supply, sustainable buildings, train stations, ports, tunnels and roads. There is no "one size fits all", and there is a place at UCL to learn how your own interests can find a home within the breadth of civil engineering.</p>
+
+        <p>Some people relish the generalist's challenge to develop the combination of design, technical, leadership and management skills to lead complex multi-disciplinary projects. Others take great pleasure in developing their specialist knowledge in a particular area of interest, often going on to become highly skilled in analysis or research techniques, sometimes in a single technical domain. It takes both sorts of engineer, and others from a range of disciplines, to deliver a successful civil engineering project. That is because all civil engineering projects are the product of multi-disciplinary teams; the best projects are designed and built by teams with well-integrated complementary skills.</p>
+
+        <p>Successful engineers often say that one of the best things about their career is that they never stop learning, combining practical skills with an understanding of the ever-changing financial, sociological and political frameworks in which they operate. As civil engineers, we work on projects that impact on people's everyday lives across the whole planet. That is no small responsibility, and learning to be a good civil engineer brings the great satisfaction of taking that responsibility and turning it into something that really does make the world a better place.</p>
+
+        <p>As a discipline, civil engineering needs diverse viewpoints and skillsets to successfully identify and address the complexities and challenges of 21st Century living. Strengths in collaboration, creativity and communication are as critical to our field as technical expertise in the mathematical and physical sciences. In CEGE you will find a diverse staff from a wide range of disciplines and backgrounds; a community here to enrich, enable and support you in your own learning journey within civil engineering.</p>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 3: Key Staff ─── -->
+      <section class="manual-section" id="sec-3">
+        <div class="section-label">Section 3</div>
+        <h2 class="section-h2">3. Key Staff</h2>
+
+        <p>You are encouraged to discuss any issues, in the first instance, with the most appropriate person listed below. Then, if required, get in contact with the Head of Department.</p>
+
+        <div class="staff-grid">
+          <div class="staff-card"><div class="staff-card__initials">JT</div><div><p class="staff-card__name">Prof. Jose Torero</p><p class="staff-card__role">Head of Department</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">KC</div><div><p class="staff-card__name">Prof. Katherine Cashell</p><p class="staff-card__role">Director of Studies</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">PD</div><div><p class="staff-card__name">Assoc. Prof. Philippe Duffour</p><p class="staff-card__role">Undergraduate Programme Director</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">PC</div><div><p class="staff-card__name">Dr Pippa Cowles</p><p class="staff-card__role">Year 1 Coordinator</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">GC</div><div><p class="staff-card__name">Dr Gemma Cremen</p><p class="staff-card__role">Year 2 Coordinator</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">PF</div><div><p class="staff-card__name">Dr Pedro Ferreira</p><p class="staff-card__role">Year 3 Coordinator</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">LG</div><div><p class="staff-card__name">Dr Lukas Gast</p><p class="staff-card__role">Year 4 Coordinator</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">LJ</div><div><p class="staff-card__name">Professor Liz Jones</p><p class="staff-card__role">Chair, UG Board of Examiners</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">KA</div><div><p class="staff-card__name">Dr Kamal Achuthan</p><p class="staff-card__role">Departmental UG Pastoral Tutor</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">IM</div><div><p class="staff-card__name">Indra Mitra-Duggan</p><p class="staff-card__role">Year 1 Student Adviser</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">MW</div><div><p class="staff-card__name">Dr Michael Woodrow</p><p class="staff-card__role">Careers Liaison Tutor</p></div></div>
+          <div class="staff-card"><div class="staff-card__initials">RL</div><div><p class="staff-card__name">Dr Rodolfo Lorenzo &amp; Prof. Gert van der Heidjen</p><p class="staff-card__role">Study Abroad Tutors</p></div></div>
+        </div>
+
+        <div class="info-box">
+          <strong>External Examiners:</strong> Dr David Taborda (BEng) · Dr Marianna Ercolino (MEng Year 4)
+        </div>
+
+        <p>Each module is led by a member of academic staff who is responsible for coordinating its teaching and assessment. A list of all staff and their contact details can be found on the <a href="https://www.ucl.ac.uk/civil-environmental-geomatic-engineering/people" target="_blank" rel="noopener">Departmental website</a>.</p>
+        <p>Descriptions for each of the departmental modules can be found in the <a href="https://www.ucl.ac.uk/module-catalogue/" target="_blank" rel="noopener">UCL Module Catalogue</a>. The Module Catalogue tells you the learning outcomes, staff contact and assessment model for each module.</p>
+
+        <!-- Sub-section 3.1 -->
+        <h3 id="sec-3-1">3.1 Professional Services</h3>
+        <p>These people will help you with teaching-related administrative issues.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Room</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ewa Kedzierska</td>
+                <td>Senior Teaching &amp; Learning Administrator</td>
+                <td>216</td>
+                <td><a href="mailto:cege.undergraduateenquiries@ucl.ac.uk">cege.undergraduateenquiries@ucl.ac.uk</a></td>
+              </tr>
+              <tr>
+                <td>Victoria Edleston</td>
+                <td>Teaching &amp; Learning Administrator</td>
+                <td>216</td>
+                <td><a href="mailto:v.edleston@ucl.ac.uk">v.edleston@ucl.ac.uk</a></td>
+              </tr>
+              <tr>
+                <td>Indra Mitra-Duggan</td>
+                <td>Year 1 Student Adviser</td>
+                <td>216</td>
+                <td><a href="mailto:i.mitra-duggan@ucl.ac.uk">i.mitra-duggan@ucl.ac.uk</a></td>
+              </tr>
+              <tr>
+                <td>Pavlina Pyari</td>
+                <td>Integrated Design Project (IDP) Administrator</td>
+                <td>216</td>
+                <td><a href="mailto:p.pyari@ucl.ac.uk">p.pyari@ucl.ac.uk</a></td>
+              </tr>
+              <tr>
+                <td>Cerine Yudin; Simon Justin</td>
+                <td>IT Support</td>
+                <td>219</td>
+                <td><a href="mailto:cege-it-support@ucl.ac.uk">cege-it-support@ucl.ac.uk</a></td>
+              </tr>
+              <tr>
+                <td>Extenuating Circumstances</td>
+                <td>—</td>
+                <td>—</td>
+                <td><a href="mailto:cege.e-c@ucl.ac.uk">cege.e-c@ucl.ac.uk</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Sub-section 3.2 -->
+        <h3 id="sec-3-2">3.2 Faculty Staff</h3>
+        <p>The following people have overall responsibilities for undergraduate and postgraduate programmes in the Faculty.</p>
+        <ul>
+          <li><strong>Vice-Dean (Education)</strong> – Professor Liz Jones</li>
+          <li><strong>Faculty Tutor</strong> – Alice Smalley</li>
+          <li><strong>Director of the Integrated Engineering Programme</strong> – Professor Emanuela Tilley</li>
+        </ul>
+        <p>A list of all key staff in the Faculty and their contact details can be found on the website: <a href="http://www.engineering.ucl.ac.uk/people-list/" target="_blank" rel="noopener">www.engineering.ucl.ac.uk/people-list/</a></p>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 4: Programme Overview ─── -->
+      <section class="manual-section" id="sec-4">
+        <div class="section-label">Section 4</div>
+        <h2 class="section-h2">4. Programme Overview</h2>
+
+        <p>Our programmes aim to produce engineers with good problem-solving abilities, excellent communication and team working skills, who are capable of managing the design or construction of large engineering projects, and are comfortable taking on complex interdisciplinary challenges.</p>
+        <p>A large proportion of teaching and learning is done through projects, so you have many opportunities to put your engineering skills into practice during your studies. Our programmes place particular emphasis on people and the environment, because civil engineers design and construct projects which ultimately impact on people and our environment. In addition to developing your theoretical, technical, and design abilities, we also focus on developing the communication, management, team working and other skills needed to be a successful engineer, all emphasized through group work.</p>
+        <p>This innovative approach to teaching is what makes our degree at UCL world leading.</p>
+        <p>You are taught by a team of academic staff from around the world, who are leading researchers in their field or specialists in teaching. Professional engineers from leading engineering firms also teach and mentor on our degrees. All students have a personal tutor who they meet regularly to discuss their studies, personal development and wellbeing.</p>
+
+        <!-- 4.1 -->
+        <h3 id="sec-4-1">4.1 BEng / MEng Engineering (Civil)</h3>
+        <p>The structure of the BEng / MEng Engineering (Civil) degree is illustrated below. All modules in Year 1 are compulsory. In Year 2 you undertake the first module of your chosen Minor, and in Year 3 you take the remaining 2 Minor modules. In Year 3 you also undertake a research project (Civil Engineering Project) where you will have the opportunity to explore an engineering topic related to your own interests. Your fourth year will comprise the Integrated Design Project (IDP) and a series of elective modules of your own choosing.</p>
+
+        <div class="table-wrap">
+          <table class="year-table">
+            <thead>
+              <tr>
+                <th>Year 1</th>
+                <th>Year 2</th>
+                <th>Year 3</th>
+                <th>Year 4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Civil Engineering Design</td>
+                <td>Design and Professional Skills 2</td>
+                <td>Civil Engineering in Practice</td>
+                <td>Integrated Design</td>
+              </tr>
+              <tr>
+                <td>Professional Skills in Civil Engineering</td>
+                <td>Scenarios in Civil Engineering</td>
+                <td rowspan="2">Civil Engineering Project</td>
+                <td rowspan="4">Optional A / B Electives</td>
+              </tr>
+              <tr>
+                <td>Engineering: Impact Assessment</td>
+                <td>Surveying and Field Studies</td>
+              </tr>
+              <tr>
+                <td>Engineering Challenges</td>
+                <td>Structural Analysis and Design</td>
+                <td>Structures and Materials</td>
+              </tr>
+              <tr>
+                <td>Structural Mechanics</td>
+                <td>Soil Mechanics and Engineering Geology</td>
+                <td>Fluids and Soils 3</td>
+              </tr>
+              <tr>
+                <td>Soil Mechanics</td>
+                <td>Materials and Applied Fluid Mechanics 2</td>
+                <td>IEP Minor 2</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Materials and Applied Fluid Mechanics 1</td>
+                <td>Mathematical Modelling and Analysis 2</td>
+                <td>IEP Minor 3</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Mathematical Modelling and Analysis 1</td>
+                <td>IEP Minor 1</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>You can find out more about these modules in the UCL Module Catalogue. Information includes the academic module lead name and the assessment model. All modules have a title and a module code (e.g. <code>CEGE0088</code> Design and Professional Skills 2). If you are writing an email with a module enquiry it is very helpful to include the module code.</p>
+
+        <!-- 4.2 -->
+        <h3 id="sec-4-2">4.2 MEng Engineering (Civil – International Programme)</h3>
+        <p>There is an opportunity to spend your 3rd year of study abroad at a host university. We hold information sessions in Year 1 and Year 2 to ensure you do not miss out if you are interested. The study abroad programme is an exciting opportunity to experience other cultures, adopt new ways of learning and develop broader horizons.</p>
+        <p>UCL has exchange schemes with universities in Europe, North America, Japan, Hong Kong, Singapore and Australia. The list of partner universities and the number of places available varies every year – check the UCL Study Abroad website for up-to-date information. UCL cannot guarantee that any student will get a place on their first choice of destination. However, past experience suggests that all students who have been accepted on the programme are offered a suitable place in alternative destinations. For those wanting to attend a non-English language university, you will need to demonstrate capability (minimum GCSE level) in the relevant language. In addition, it may be appropriate for you to pick Modern Foreign Languages as your Minor.</p>
+        <p>Placements on the Study Abroad programme are highly selective and the selection process is normally based on your first year results, a personal statement and a short interview. Your overall results must be greater than <strong>65%</strong> in Year 1, preferably <strong>70%</strong>, to be accepted onto the programme. If you wish to go on the year abroad programme you must be enrolled on the MEng Engineering (Civil – International Programme) <strong>(H205)</strong>. Applications will not be considered if you are not registered on the year abroad programme by the start of Reading Week of Term 1 in Year 2. The Study Abroad tutors reserve the right to withdraw the offer of a place to a student who does not maintain consistently high results in Year 2. While abroad, the students will remain in touch with the Study Abroad Tutors at CEGE who act as their personal tutors for the year. As well as exciting, the programme can be challenging, but past students have found it to be extremely rewarding and career-enhancing.</p>
+        <div class="info-box">
+          For more information about Study Abroad, please contact the Study Abroad Tutor, <strong>Dr Rodolfo Lorenzo</strong>: <a href="mailto:r.lorenzo@ucl.ac.uk">r.lorenzo@ucl.ac.uk</a>
+        </div>
+
+        <!-- 4.3 -->
+        <h3 id="sec-4-3">4.3 BEng/MEng Engineering (Civil – Year in Industry)</h3>
+        <p>You can opt to take a year out in industry before your final year of study. At the end of your work placement you will need to produce a portfolio that outlines the activities that you carried out. This report and the year in industry do not count towards your degree classification but your degree certificate will show <strong>"BEng or MEng with year in Industry"</strong>. Should you wish to follow this route, we will support you but it is your responsibility to find a suitable placement. UCL will not charge tuition fees during your year in industry.</p>
+        <p>If you are interested in taking a year out in industry, please speak to <strong>Prof Aiduan Borrion</strong> (the Year in Industry Tutor): <a href="mailto:a.borrion@ucl.ac.uk">a.borrion@ucl.ac.uk</a> and read the information on the student information page: CEGE Student Intranet.</p>
+
+        <!-- 4.4 -->
+        <h3 id="sec-4-4">4.4 Change of Programme</h3>
+        <p>If you wish to change your degree programme (BEng to MEng, MEng to BEng), please discuss with the Undergraduate Programme Director. You then need to log into the Portico system and complete the online application using the "C2RS Home" menu. In order to transfer from BEng to MEng you must have a weighted average of at least <strong>55.00%</strong> at the end of Year 2 (note that this threshold was 50.00% in previous years but regulations have now changed as spelled out here from 2024 onward). The pass mark changes for the BEng Years 1–3 (corresponding Levels 4–6) from 40% to 50% Year 4 (Level 7). The latest dates for changing programmes are listed below. If you intend to change programmes, please do so well in advance.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Programme</th><th>Deadline</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>BEng to MEng</td>
+                <td>Last Friday of Term 3 in Year 3</td>
+              </tr>
+              <tr>
+                <td>MEng to BEng</td>
+                <td>Last Friday before start of Term 1 in Year 4</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 4.5 Prizes -->
+        <h3 id="sec-4-5a">4.5 Prizes</h3>
+        <p>Our top achieving students are awarded annual prizes at the board of examiners meeting. The criteria of the awards are given below:</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Prize</th><th>Criteria</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1st and 2nd Year Prizes (4 in total)</td>
+                <td>Best overall performance in Year 1 and Year 2</td>
+              </tr>
+              <tr>
+                <td>Chadwick Prize</td>
+                <td>Best performance in courses related to Environmental Engineering</td>
+              </tr>
+              <tr>
+                <td>The Institution of Structural Engineers Past Presidents' Prize</td>
+                <td>Best performance in Engineering Design at masters level (MEng)</td>
+              </tr>
+              <tr>
+                <td>Institution of Civil Engineers Prize</td>
+                <td>Best all-round performance in final year (BEng or MEng by a student member of ICE) with a weighting towards Design</td>
+              </tr>
+              <tr>
+                <td>RB Hounsfield Prize in Traffic Engineering</td>
+                <td>Best performance in Transport Studies</td>
+              </tr>
+              <tr>
+                <td>LF Vernon-Harcourt Prize</td>
+                <td>Best overall performance in Civil Engineering</td>
+              </tr>
+              <tr>
+                <td>Third Year Project Prizes: Best Project, Outstanding Project, Best Presentation</td>
+                <td>Best performance in Third Year Project</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 4.5 Rules for Progression -->
+        <h3 id="sec-4-5b">4.5 Rules for Progression and Scheme of Award</h3>
+        <p>Rules for progression and award on degree programmes in the department comply with the regulations as set out in <strong>Chapter 4: Assessment Framework for Taught Programmes</strong> of the UCL Academic Manual. However, there are local variations to these for Engineering programmes.</p>
+        <p>In order to comply with the Engineering Council requirements for professional accreditation, this programme is subject to condonement regulations which differ from the standard UCL regulations in the following ways:</p>
+
+        <ol>
+          <li>
+            <strong>Condonement applies only to module marks falling within the following Condonable Ranges:</strong>
+            <ul>
+              <li>Modules at level 4, 5 and 6: <strong>30.00% – 39.99%</strong></li>
+              <li>Modules at level 7: <strong>40.00% – 49.99%</strong></li>
+            </ul>
+          </li>
+          <li>In order to progress from one year to the next, or to be awarded a BEng or MEng with Honours, a student should <strong>Pass 120 credits</strong> in each year of study.</li>
+          <li>
+            A student who does not Pass 120 credits in a year of study must nonetheless be considered to have met the Progression and Award Requirements if they meet all of the following <strong>Condonement Criteria</strong> in that year of study:
+            <ol type="a">
+              <li>Pass all Non-Condonable Modules, and</li>
+              <li>Pass at least 90 credits, and</li>
+              <li>Attain marks in the Condonable Range in no more than 30 credits, and</li>
+              <li>Have attained marks in the Condonable Range in no more than 30 credits up to and including the current year of study, and</li>
+              <li>Have no marks below the condonable range, and</li>
+              <li>Achieve a credit-weighted mean of at least <strong>40.00%</strong> (50.00% in the Masters year) across 120 credits.</li>
+            </ol>
+          </li>
+          <li>At most <strong>30 credits</strong> may be condoned in any given year of study AND at most <strong>30 credits</strong> may be condoned across the programme as a whole.</li>
+          <li>Cognate, non-accredited programmes have been established as exit points only (interim qualifications), with titles such as MEng/BEng Engineering Sciences (DISCIPLINE NAME). These programmes are designed for students who do not meet the previously outlined requirements but fulfil UCL's conditions for award.</li>
+        </ol>
+
+        <div class="info-box info-box--warning">
+          <strong>MEng Progression Requirement:</strong> In addition to the requirements above, to progress from Year 2 to Year 3 on the MEng programme you must have a weighted average of at least <strong>55.00%</strong> at the end of Year 2. If you fail to achieve this average but meet the remaining progression criteria you may progress to Year 3 but you will be transferred to the corresponding BEng programme. <strong>Subsequent transfer back to the MEng will not be possible.</strong>
+        </div>
+
+        <p>In the event that you have not passed sufficient number of credits or failed a non-condonable module you will be required to retake the failed components of this module(s) during the <strong>Late Summer Assessment period</strong>. This is usually held in late August / early September and may include in-person examinations during this time.</p>
+
+        <!-- 4.6 Non-Condonable Modules -->
+        <h3 id="sec-4-6">4.6 List of Non-Condonable Modules</h3>
+        <p>These modules must be passed by the first or second attempt, in order for you to remain on your programme or be awarded a degree. Failures in these modules will result in you being withdrawn from your programme.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Module Code</th>
+                <th>Module Title</th>
+                <th>Level</th>
+                <th>UCL Credits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>CEGE0017</code></td>
+                <td>Civil Engineering Project</td>
+                <td>L6</td>
+                <td>30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 4.7 Honours Classification -->
+        <h3 id="sec-4-7">4.7 Honours Classification</h3>
+        <p>The table below explains the weighting of marks towards your final Honours degree. Details about the classification are given in Section 9.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Year 1</th>
+                <th>Year 2</th>
+                <th>Year 3</th>
+                <th>Year 4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>3 Year BEng</strong></td>
+                <td>All 120 credits · Weighted at <strong>1</strong></td>
+                <td>All 120 credits · Weighted at <strong>3</strong></td>
+                <td>All 120 credits · Weighted at <strong>5</strong></td>
+                <td>n/a</td>
+              </tr>
+              <tr>
+                <td><strong>4 Year MEng</strong></td>
+                <td>All 120 credits · Weighted at <strong>1</strong></td>
+                <td>All 120 credits · Weighted at <strong>3</strong></td>
+                <td>All 120 credits · Weighted at <strong>5</strong></td>
+                <td>All 120 credits · Weighted at <strong>5</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box">Additional Extra-mural or Placement Years must be weighted at <strong>0</strong> in the Classification.</div>
+
+        <!-- 4.8 Interim Qualifications -->
+        <h3 id="sec-4-8">4.8 Interim Qualifications</h3>
+        <p>You are expected to graduate with either a BEng or MEng Civil Engineering Honours degree. Both these programmes are accredited by the Joint Board of Moderators (JBM). The relevant progression rules are listed in Section 4.5.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Qualification</th>
+                <th>Level</th>
+                <th>Credits Required</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Master of Engineering with Honours (MEng)</td>
+                <td>7</td>
+                <td>480 credits with no more than 150 at level 4, at least 90 at level 6, and 120 at level 7</td>
+              </tr>
+              <tr>
+                <td>Bachelor of Engineering (BEng)</td>
+                <td>6</td>
+                <td>360 credits with no more than 150 at level 4 and at least 90 at level 6</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>In the event you achieve fewer credits or do not meet the progression rules outlined in Section 4.5 but meet the standard UCL progression rules, you may be eligible for an interim qualification. These are non-accredited programmes (i.e. would not count toward professional chartership of UK institutions).</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Qualification</th>
+                <th>Level</th>
+                <th>Credits Required</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Engineering Science (Civil) MEng</td>
+                <td>7</td>
+                <td>480 credits with no more than 150 at level 4, at least 90 at level 6, and 120 at level 7</td>
+              </tr>
+              <tr>
+                <td>Engineering Science (Civil) BEng</td>
+                <td>6</td>
+                <td>360 credits with no more than 150 at level 4 and at least 90 at level 6</td>
+              </tr>
+              <tr>
+                <td>Ordinary Degree (Bachelors without Honours)</td>
+                <td>6</td>
+                <td>300 credits with at least 60 at level 6</td>
+              </tr>
+              <tr>
+                <td>Diploma in Higher Education (Dip HE)</td>
+                <td>5</td>
+                <td>240 credits with at least 90 at level 5</td>
+              </tr>
+              <tr>
+                <td>Certificate in Higher Education (Cert HE)</td>
+                <td>4</td>
+                <td>120 credits at level 4 or higher</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 5: Teaching & Learning ─── -->
+      <section class="manual-section" id="sec-5">
+        <div class="section-label">Section 5</div>
+        <h2 class="section-h2">5. Teaching &amp; Learning Activities</h2>
+
+        <h3 id="sec-5-1">5.1 Structure of Programme</h3>
+        <p>In Years 1 and 2, you learn through a range of teaching and learning activities including lectures, clinics, problem classes, laboratories, exams, project work, site visits and field trips. Residential field trips (surveying and construction field courses), are among the highlights of the first and second years.</p>
+        <p>Challenges and Scenarios are authentic, problem-based learning projects where first, second- and third-year students work in teams on realistic engineering design projects (e.g. street renewal, sustainable building, etc). You apply, integrate and consolidate the knowledge acquired on the programme and elsewhere to solve complex problems that an engineer encounters in professional practice.</p>
+
+        <h4>Year 1 Modules</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Selection</th>
+                <th>Code</th>
+                <th>Module Title</th>
+                <th>Level</th>
+                <th>Credits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Compulsory</td><td><code>ENGF0001</code></td><td>Engineering Challenges</td><td>L4</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0102</code></td><td>Professional Skills in Civil Engineering</td><td>L4</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>ENGF0003</code></td><td>Mathematical Modelling and Analysis 1</td><td>L4</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0003</code></td><td>Civil Engineering Design</td><td>L4</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0101</code></td><td>Structural Mechanics</td><td>L4</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0099</code></td><td>Engineering: Impact Assessment</td><td>L4</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0100</code></td><td>Soil Mechanics</td><td>L4</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0108</code></td><td>Materials and Applied Fluid Mechanics I</td><td>L4</td><td>15</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Year 2 Modules</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Selection</th>
+                <th>Code</th>
+                <th>Module Title</th>
+                <th>Level</th>
+                <th>Credits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Compulsory</td><td><code>ENGF0004</code></td><td>Modelling and Analysis II</td><td>L5</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0009</code></td><td>Structural Analysis and Design</td><td>L5</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0011</code></td><td>Materials and Applied Fluid Mechanics II</td><td>L5</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0088</code></td><td>Design and Professional Skills II</td><td>L5</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0012</code></td><td>Scenarios in Civil Engineering</td><td>L5</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0013</code></td><td>Soil Mechanics and Engineering Geology</td><td>L5</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0014</code></td><td>Surveying and Field Studies</td><td>L5</td><td>15</td></tr>
+              <tr><td>Elective</td><td>—</td><td>IEP Minor 1</td><td>L5</td><td>15</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Towards the end of Year 1, students choose an IEP Minor subject to complement their civil engineering degree. The Minor comprises one module in Year 2 and two modules in Year 3. The minors available to you will be communicated to you at a dedicated event run by the Integrated Engineering Programme team. We recommend you pick a topic that reflects and enhances your career aspirations.</p>
+        <p>Modern Foreign Languages should only be chosen if you require an additional language for the year abroad or have specific careers aims for working in a foreign language country. Opting for a Modern Foreign Language Minor should be discussed and approved by the Programme Director first.</p>
+
+        <h4>Year 3 Overview</h4>
+        <p>Your third year comprises compulsory modules in civil engineering, including <strong>Civil Engineering in Practice</strong>, a module that looks at structural design to codes, project finance and management and also includes the Construction Field Course and a scenario. The <strong>Civil Engineering Project</strong> is your opportunity to undertake academic research under the supervision of academic staff. Here, students either propose their own projects or select projects of interest from a published list. A broad array of topics is available from across the civil engineering spectrum and can be lab-based, desk-based or field-based. The project supervisors will also act as personal tutors throughout Year 3. You will meet with your supervisors regularly and receive help on report writing, but self-management is also critical to the project's success. You will need to submit interim and final submissions as well as present your projects to your supervisor and second marker.</p>
+
+        <h4>Year 3 Modules</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Selection</th>
+                <th>Code</th>
+                <th>Module Title</th>
+                <th>Level</th>
+                <th>Credits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Compulsory</td><td><code>CEGE0021</code></td><td>Civil Engineering in Practice</td><td>L6</td><td>30</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0024</code></td><td>Structures and Materials</td><td>L6</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0026</code></td><td>Fluids and Soils III</td><td>L6</td><td>15</td></tr>
+              <tr><td>Compulsory</td><td><code>CEGE0017</code></td><td>Civil Engineering Project</td><td>L6</td><td>30</td></tr>
+              <tr><td>Elective</td><td>—</td><td>IEP Minor 2</td><td>L6</td><td>15</td></tr>
+              <tr><td>Elective</td><td>—</td><td>IEP Minor 3</td><td>L6</td><td>15</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Year 4 (MEng Only) Overview</h4>
+        <p>In the fourth year, all MEng students undertake an <strong>Integrated Design Project</strong>. This module is the capstone of your MEng degree. This is a large-scale, industry-facing design exercise, running over the year, where industry partners take a leading role to ensure the experience mirrors a real civil engineering project, from bidding for a project to the delivery of a final design. Past projects include: a skyscraper in Waterloo, a pier in Monaco, flood defences in Genoa, a new port facility in Angola, an extension to the Docklands Light Railway (DLR) in East London, a 'Grey Belt' site development with sustainable housing in London, and a multi-use offshore renewable energy demonstration scheme in the UK.</p>
+        <p>Students also select four advanced modules, drawn from two streams. There is also the possibility to enrol on any UCL Level 7 modules for which you are eligible but please check this directly with the relevant home department via the Module Leader listed in the UCL Module Catalogue.</p>
+
+        <h4>Year 4 Modules</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Selection</th>
+                <th>Code</th>
+                <th>Module Title</th>
+                <th>Level</th>
+                <th>Credits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Compulsory</td><td><code>CEGE0048</code></td><td>Integrated Design</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0023</code></td><td>Offshore and Coastal Engineering</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0030</code></td><td>Roads and Underground Infrastructure: Design, Construction and Maintenance</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0031</code></td><td>Advanced Soil Mechanics</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0032</code></td><td>Introduction to Seismic Design of Structures</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0038</code></td><td>Finite-Element Modelling and Numerical Methods</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0039</code></td><td>Urban Flooding and Drainage</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0040</code></td><td>Structural Dynamics</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0046</code></td><td>Advanced Structural Analysis</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0057</code></td><td>Advanced Civil Engineering Materials</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0060</code></td><td>Engineering Study of Rail Systems and Infrastructure</td><td>L7</td><td>15</td></tr>
+              <tr><td>Elective</td><td><code>CEGE0075</code></td><td>Environmental Fluid Mechanics</td><td>L7</td><td>15</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box">The CEGE modules are shared across a number of MSc programmes so the class size varies and selection is done on a <strong>first come first served basis</strong>. Please take note that if the class size is too small the module may not run.</div>
+
+        <h3 id="sec-5-2">5.2 Attendance Requirements</h3>
+        <p>UCL expects students to attend all the scheduled learning events which appear on their timetable as this gives students the best chance of academic success. This includes all events set out in the academic manual or those provided to students during a module, including personal tutorials.</p>
+        <p>Further information: <a href="https://www.ucl.ac.uk/students/academic-policies/attendance-ucl" target="_blank" rel="noopener">Attendance at UCL</a></p>
+
+        <h4>Attendance in Term 3</h4>
+        <p>We run teaching and learning activities in Term 3 in all years. Residential field trips sometimes run beyond Term 3 and students will be notified in advance if this is to be the case. <strong>Attendance is compulsory.</strong> Please bear this in mind when making travel arrangements.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Term 3 Teaching &amp; Learning Activities</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Year 1</td><td>Residential Field Trip for Surveying</td></tr>
+              <tr><td>Year 2</td><td>Residential Field Trip for Construction</td></tr>
+              <tr><td>Year 3</td><td>Research Project Presentations at UCL</td></tr>
+              <tr><td>Year 4</td><td>Integrated Design Final Phase at UCL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="sec-5-3">5.3 Workload and Time Management</h3>
+        <p>The workload for students including private study is approximately <strong>40 hours per week</strong>. You should be prepared to spend more time on your studies in a given week if necessary. It is very important that you plan ahead and manage your time effectively.</p>
+        <p>You are expected to attend timetabled learning events and to conduct adequate personal study activities in your own time.</p>
+        <p>Lectures and coursework are closely linked so a good understanding of the lecture contents will help you with your coursework. It is recommended you are proactive with this and keep on top of your lectures and additional reading.</p>
+        <p>You should attend all lectures and ensure that you fully understand all aspects of each lecture in advance of the next one. Lectures provide a basic framework for a course, but you should also complement your learning through background reading, problem sheets and group discussions.</p>
+        <div class="info-box info-box--warning">You must submit all your coursework. Students who do not submit any component will be awarded a mark of <strong>0%</strong> for that component.</div>
+
+        <h3 id="sec-5-4">5.4 Extra-Curricular Activities</h3>
+        <p>UCLU offers a number of clubs and societies that you can join. The Department and Faculty supports a number of extra-curricular activities. We have a student society <strong>CIVSoc</strong> that run a number of events and activities. For more information please visit:</p>
+        <ul>
+          <li><a href="https://www.instagram.com/uclcivsoc/" target="_blank" rel="noopener">UCL CivSoc on Instagram (@uclcivsoc)</a></li>
+          <li><a href="https://www.linkedin.com/company/ucl-civil-engineering-society/" target="_blank" rel="noopener">UCL Civil Engineering Society on LinkedIn</a></li>
+          <li>Contact: <a href="mailto:CivSoc@ucl.ac.uk">CivSoc@ucl.ac.uk</a></li>
+        </ul>
+        <p>Your achievements can be officially recognised in the <strong>Higher Education Achievement Report (HEAR)</strong>. Some of them include:</p>
+        <ul>
+          <li>Activities verified as significant by the Careers Service</li>
+          <li>Deans List and Academic Medals</li>
+          <li>Departmental/Divisional Prizes</li>
+          <li>Global Citizenship</li>
+          <li>Language Centre courses not undertaken as part of a degree programme</li>
+          <li>Officers of Departmental/Divisional Clubs and Societies</li>
+          <li>Scholarships received for merit and for merit and need</li>
+          <li>StARs</li>
+          <li>Student Ambassadors/Mentors</li>
+          <li>UCLU Officers of Clubs and Societies</li>
+          <li>Voluntary activities</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 6: Academic & Personal Support ─── -->
+      <section class="manual-section" id="sec-6">
+        <div class="section-label">Section 6</div>
+        <h2 class="section-h2">6. Academic and Personal Support</h2>
+
+        <h3 id="sec-6-1">6.1 Departmental UG Pastoral Tutor</h3>
+        <p>The Departmental UG Pastoral Tutor, <strong>Dr Kamal Achuthan</strong>, is responsible for supporting student learning and engagement through the implementation of the UCL Student Support Framework.</p>
+        <p>He is the main point of contact relating to student support and to discuss any of the following issues:</p>
+        <ul>
+          <li>Withdrawal from your programme</li>
+          <li>Interruption of studies (to pause your engagement with your studies for a year in the first instance)</li>
+          <li>Extenuating Circumstances (mitigation for short-term issues that arise affecting your studies and your assessment)</li>
+          <li>Summary of Reasonable Adjustment (SoRA) – method for managing longer-term conditions, e.g. dyslexia, anxiety, ADHD</li>
+          <li>Academic Adjustments</li>
+          <li>Exam Adjustments</li>
+          <li>Support to Study</li>
+          <li>Issues with personal tutor provision</li>
+        </ul>
+
+        <h3 id="sec-6-2">6.2 Departmental Student Adviser</h3>
+        <p>Year 1 students also benefit from the support of <strong>Indra Mitra-Duggan</strong>, our dedicated Departmental Student Adviser from UCL Student Support and Wellbeing. Indra can offer a range of academic and non-academic advice to support your time with us. She works with other members of the department to ensure that you are supported in your learning and engagement. Indra may also help with complex cases for later year students too. She is a fantastic point of contact for our students!</p>
+
+        <h3 id="sec-6-3">6.3 Personal Tutorials</h3>
+        <p>Every student is assigned a personal tutor. This is a member of academic staff who will work closely and informally with you over the year to support your learning and engagement with the programme.</p>
+        <p>At least <strong>four personal tutorial sessions</strong> will be timetabled per year. The responsibility of scheduling these meetings sits with the Personal Tutor; the responsibility of attending these meetings sits with you. These sessions provide an opportunity to get to know a member of staff to act as the first point of contact if you have personal or academic issues (see also 6.7 and 6.8). Your personal tutor can also write reference letters for you (for academic and non-academic applications).</p>
+        <p>Personal Tutor should arrange a professional visit to a construction site and/or a consulting engineering firm. These are designed to enhance awareness of professional engineering practice and to inspire you in your studies and future careers.</p>
+
+        <h3 id="sec-6-4">6.4 Additional Maths Sessions</h3>
+        <p>We arrange additional maths sessions to support students who are finding maths particularly difficult. If you were admitted without an A-level in Maths or are struggling with the 'Mathematical Modelling &amp; Analysis 1' module, please discuss this with your Personal Tutor or speak to the Year 1 Co-ordinator <strong>Dr Pippa Cowles</strong>.</p>
+
+        <h3 id="sec-6-5">6.5 Additional English Sessions</h3>
+        <p>The working language of UCL is English, and proficiency in written and spoken English is essential in order to make the most of your time at UCL. The <strong>UCL Academic Communication Centre (ACC)</strong> supports UCL students to develop their academic language and literacies. They assist students of all language backgrounds, across faculties, at all levels of study, to communicate more effectively in their discipline. They work closely with UCL academic departments and faculties to develop tailored support.</p>
+        <p>Their website is here: <a href="https://www.ucl.ac.uk/languages-international-education/ucl-academic-communication-centre" target="_blank" rel="noopener">UCL Academic Communication Centre</a></p>
+        <p>In Year 1 we identify students who are having difficulty writing in English, and can arrange additional support. If you feel your English language skills are detracting from your academic performance, please discuss this with your Personal Tutor or the first year coordinator.</p>
+
+        <h3 id="sec-6-6">6.6 Transition Mentors</h3>
+        <p>The UCL Transition Programme supports new first-year students at UCL, helping them to settle in quickly and achieve their potential. Each first-year student is assigned a <strong>Transition Mentor</strong> for their first term. Transition mentors are later-year students within each department who work with small groups of students on a weekly basis to help them settle in to UCL and London as well as focussing on academic issues and topics specific to their degree programme. First-year students meet their Transition Mentor during the first week of term at their department's 'Meet your Mentor' session.</p>
+        <p>Further information: <a href="https://www.ucl.ac.uk/students/support/transition-mentors" target="_blank" rel="noopener">Transition Mentors | UCL</a></p>
+
+        <h3 id="sec-6-7">6.7 Academic Issues</h3>
+        <p>Please follow the protocol below to address academic issues (i.e. those relating to a particular module, piece of assessment etc.) as they arise:</p>
+        <ol>
+          <li>Approach the member of staff directly, i.e. try to resolve the problem informally first.</li>
+          <li>Discuss with your Personal Tutor, who can provide advice or attempt to resolve the problem.</li>
+          <li>Mention it to your Student Representative, who meets regularly with the Year Coordinator and represents your class at the Departmental Partnership Committee. Others may be experiencing the same difficulty.</li>
+          <li>Speak to the relevant Year Coordinator.</li>
+          <li>Speak to the Undergraduate Programme Director.</li>
+          <li>Send an email to <a href="mailto:cege-feedback@ucl.ac.uk">cege-feedback@ucl.ac.uk</a> – this is anonymous and all identifying information will be removed before the email is passed to the Director of Studies, who will speak with the relevant Section Head and Head of Department to resolve the issue.</li>
+          <li>Speak to the Director of Studies.</li>
+          <li>Speak to the Head of Department.</li>
+        </ol>
+
+        <h3 id="sec-6-8">6.8 Personal Issues</h3>
+        <p>If you are experiencing personal issues that may impact on your academic performance, please follow the protocol below:</p>
+        <ol>
+          <li>Discuss with your Personal Tutor or Student Adviser, who can provide advice or point you towards someone who can assist (NB. You can also approach any member of staff with whom you feel comfortable talking).</li>
+          <li>You can read about the range of support services UCL provides for students online: <a href="http://www.ucl.ac.uk/current-students/support" target="_blank" rel="noopener">www.ucl.ac.uk/current-students/support</a></li>
+          <li>Speak to the Departmental UG Pastoral Tutor, especially if you need to tell us about extenuating circumstances (personal or health issues affecting your work) or wish to interrupt your studies. The Departmental UG Pastoral Tutor can also advise on Authorised Absences (Tier 4) and Withdrawals.</li>
+          <li>Speak with the Director of Studies.</li>
+        </ol>
+        <div class="info-box info-box--green">If you need assistance, please don't be afraid to ask for it. Everyone experiences personal difficulties at some stage during their lives. We will try to give assistance wherever we can to ensure your experience at UCL is fulfilling, healthy and enjoyable.</div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 7: Field Courses ─── -->
+      <section class="manual-section" id="sec-7">
+        <div class="section-label">Section 7</div>
+        <h2 class="section-h2">7. Field Courses</h2>
+
+        <p>The department highly values practical experience and runs a number of <strong>residential field courses</strong>, usually in Term 3 and beyond, into the Summer break. The costs associated with these field courses are heavily subsidised by the department, but all students are expected to contribute towards these costs. Alternative payment options may be available to support students in financial need.</p>
+        <p>The cost represents a fraction of the real cost of the field trips and is meant to cover your usual living costs. Students really enjoy and benefit from the field courses which are essential for the development of successful engineers. Further information will be provided however each student should expect to contribute between <strong>£200–£300 for each field trip</strong>.</p>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 8: Professionalism ─── -->
+      <section class="manual-section" id="sec-8">
+        <div class="section-label">Section 8</div>
+        <h2 class="section-h2">8. Professionalism</h2>
+
+        <h3 id="sec-8-1">8.1 Professional Charter</h3>
+        <p>As Engineers we have a responsibility to be professional in carrying out our work. This means treating the people you work with and your environment with respect.</p>
+
+        <div class="charter-grid">
+          <div class="charter-card">
+            <h4>We expect you to:</h4>
+            <ul>
+              <li>Act in the manner expected of a professional engineer</li>
+              <li>Carry out your studies effectively, to a good standard and within prescribed timetabled periods</li>
+              <li>Respect your fellow students, staff, others, and your environment</li>
+              <li>Submit your coursework on time</li>
+              <li>Bring any problems to the attention of your Personal Tutor, UG Pastoral Tutor, Student Adviser, Year Coordinator, Undergraduate Programme Director or Director of Studies, including those of a medical or social nature, and especially if it is affecting your work</li>
+              <li>Speak in confidence to the Director of Studies or Faculty Tutor if you feel that there is a problem with your programme that has not been resolved by the mechanisms described here</li>
+              <li>Follow the procedures set out for study leave or interruption of study</li>
+            </ul>
+          </div>
+          <div class="charter-card charter-card--right">
+            <h4>You can expect us to:</h4>
+            <ul>
+              <li>Act in the manner expected of a professional engineer</li>
+              <li>Provide support for your learning that is well organised</li>
+              <li>Be sympathetic and take seriously any concerns or problems that you raise regarding your programme or your personal circumstances</li>
+              <li>Provide written or verbal feedback on all coursework within <strong>four weeks</strong> of submission, in accordance with UCL guidelines</li>
+              <li>Provide access to and advice on the support services offered by UCL</li>
+              <li>Give opportunities for feedback on all modules and programmes and demonstrate the results of this feedback</li>
+              <li>Provide a personal tutor who can support your professional development</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 id="sec-8-2">8.2 Your Future Career</h3>
+        <p>It is never too early to start thinking about your career. We organise a variety of career events as part of the programme to develop your career-related skills and allow you to explore the many different areas of engineering. You will have a number of opportunities to showcase your talent to practising engineers throughout your degree programme.</p>
+        <p>It is a good idea to keep your CV up to date. If possible, start to get some work experience during the summer holidays. You could also set up a LinkedIn page to help network with engineers who may be useful in finding a job later on.</p>
+        <p>In addition to the CEGE Careers Liaison Tutor, <strong>Dr Michael Woodrow</strong>, you have the following useful resources:</p>
+        <ul>
+          <li><strong>UCL Engineering Careers Service:</strong> <a href="https://www.engineering.ucl.ac.uk/careers" target="_blank" rel="noopener">www.engineering.ucl.ac.uk/careers</a></li>
+          <li><strong>UCL Careers Office:</strong> <a href="https://www.ucl.ac.uk/careers" target="_blank" rel="noopener">www.ucl.ac.uk/careers</a></li>
+        </ul>
+        <p>The UCL Engineering Careers Service and UCL Careers Office can assist you with finding employment, figuring out what you would like to do after university and how to achieve it, evaluating and developing your skills, reviewing your CV and job applications, and mock interviews.</p>
+
+        <h3 id="sec-8-3">8.3 Becoming a Chartered Engineer</h3>
+        <p>Chartered engineers have been assessed by their peers as competent professionals in their field. It is a registered professional title (<strong>CEng</strong>) which is internationally recognised, and certain engineering work is reserved for chartered engineers.</p>
+        <p>To become a chartered engineer, you first need to satisfy the educational base, i.e. complete an accredited degree. After graduating from university you continue to practise and develop your professional skills and competencies whilst working as an engineer. After you have gained sufficient experience, typically after you have completed your graduate training programme, you can become a chartered engineer by demonstrating these skills and competencies in a professional ICE exam.</p>
+        <p>Our undergraduate degree programmes offer a first step towards becoming a chartered engineer and are accredited by The Joint Board of Moderators (JBM).</p>
+        <ul>
+          <li>The <strong>MEng in Civil Engineering</strong> is accredited as <em>fully satisfying</em> the educational base to become a chartered engineer (CEng) and provides a more direct route to becoming chartered.</li>
+          <li>The <strong>BEng in Civil Engineering</strong> <em>partially satisfies</em> the educational base for a Chartered Engineer, meaning that a programme of accredited further learning (e.g. UCL MSc Civil Engineering or MSc Earthquake Engineering with Disaster Management) is required to complete the education base to become a chartered engineer.</li>
+        </ul>
+
+        <h3 id="sec-8-4">8.4 Professional Institutions</h3>
+        <p>Professional institutions are centres of engineering knowledge which represent engineers and promote their positive impact on society. They ensure engineers are properly qualified, through accrediting degree programmes, and managing the process for becoming a Chartered Engineer.</p>
+        <p>Most institutions offer <strong>free student membership</strong>, which includes access to lectures on exciting engineering projects, and access to their libraries and publications. It is a good idea to join the Institution of Civil Engineers (ICE) initially, and then other institutions as your interests develop. Mentioning these memberships on your CV shows potential employers that you are thinking seriously about your future career.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Institution</th><th>Website</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Institution of Civil Engineers (ICE)</td><td><a href="https://www.ice.org.uk/" target="_blank" rel="noopener">www.ice.org.uk</a></td></tr>
+              <tr><td>Institution of Structural Engineers (IStructE)</td><td><a href="https://www.istructe.org/" target="_blank" rel="noopener">www.istructe.org</a></td></tr>
+              <tr><td>Chartered Institution of Water and Environmental Management (CIWEM)</td><td><a href="https://www.ciwem.org/" target="_blank" rel="noopener">www.ciwem.org</a></td></tr>
+              <tr><td>Institute of Highway Engineers (IHE)</td><td><a href="https://www.theihe.org/" target="_blank" rel="noopener">www.theihe.org</a></td></tr>
+              <tr><td>Chartered Institution of Highways &amp; Transportation (CIHT)</td><td><a href="https://www.ciht.org.uk/" target="_blank" rel="noopener">www.ciht.org.uk</a></td></tr>
+              <tr><td>Chartered Institution of Building Services Engineers (CIBSE)</td><td><a href="https://www.cibse.org/" target="_blank" rel="noopener">www.cibse.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 9: Understanding Your Marks ─── -->
+      <section class="manual-section" id="sec-9">
+        <div class="section-label">Section 9</div>
+        <h2 class="section-h2">9. Understanding Your Marks</h2>
+
+        <p>The UK university undergraduate marking system has historically been different from most other systems around the world. The system is also likely to differ from what you are used to from school or college.</p>
+        <p>Marking guidance will be provided for all assignments. Please see the CEGE Departmental Manual for All Students for general marking guidelines. Where marking guidance is missing, please contact the Module Lead in the first instance, then the Director of Studies for follow-up.</p>
+
+        <h3 id="sec-9-1">9.1 Honours Degree</h3>
+        <p>If you study for an undergraduate degree at UCL, you are aiming to graduate with a degree with honours. With this type of degree, the level of your academic performance on your programme is indicated by the 'class' of degree – or honours – you are awarded. Most universities award a class of degree based on the marks from the assessed work you have completed. To distinguish between students on the basis of their academic achievement, undergraduate degree awards are classified as follows:</p>
+
+        <div class="honours-grid">
+          <div class="honours-card honours-card--gold">
+            <div class="honours-card__band">First Class</div>
+            <div class="honours-card__pct">70% and above</div>
+            <p>A first-class degree, usually referred to as a 'first' or 1st, is the highest honours degree you can achieve.</p>
+          </div>
+          <div class="honours-card honours-card--silver">
+            <div class="honours-card__band">Upper Second Class</div>
+            <div class="honours-card__pct">60–69%</div>
+            <p>Known as a 2:1 or two-one, is the higher of the two levels of second-class degree.</p>
+          </div>
+          <div class="honours-card honours-card--bronze">
+            <div class="honours-card__band">Lower Second Class</div>
+            <div class="honours-card__pct">50–59%</div>
+            <p>A 2.2 or two-two is the lower level of the second-class degree.</p>
+          </div>
+          <div class="honours-card">
+            <div class="honours-card__band">Third Class</div>
+            <div class="honours-card__pct">40–49%</div>
+            <p>Known as a 'third' or 3rd, this degree is the lowest honours degree achievable.</p>
+          </div>
+          <div class="honours-card honours-card--grey">
+            <div class="honours-card__band">Ordinary Degree</div>
+            <div class="honours-card__pct">Below threshold</div>
+            <p>If an honours student fails to achieve a third class by a small margin, they will be awarded an ordinary degree i.e. without honours.</p>
+          </div>
+        </div>
+
+        <h3 id="sec-9-2">9.2 BA, BSc, MEng or what?</h3>
+        <p>When you graduate, the honours degree you are awarded depends on the disciplines you study.</p>
+        <ul>
+          <li>For example, if you take an undergraduate degree in biochemistry, the qualification you will receive is <strong>BSc</strong>, where 'B' signifies 'Bachelor' and 'Sc' signifies 'Science'.</li>
+          <li>If you take an integrated Master's degree (a four year honours degree course which combines three years of undergraduate study with a fourth year at postgraduate level) the qualification you will receive is <strong>MEng</strong>, MSci or MPharm, depending on your discipline.</li>
+        </ul>
+        <p>In CEGE, at the successful completion of your UCL taught undergraduate programme, you will be awarded one of the following degrees, according to your discipline:</p>
+        <ul>
+          <li><strong>Bachelor of Engineering (BEng)</strong></li>
+          <li><strong>Master of Engineering (MEng)*</strong> — integrated Master's degree</li>
+        </ul>
+        <p>Other interim qualifications will be available as outlined earlier in Section 4.8.</p>
+
+        <h3 id="sec-9-3">9.3 Assessment at UCL</h3>
+        <p>The way your assessments are marked is likely to be different to your previous school or college. Your module marks will be out of <strong>100 and given to 2 decimal places</strong>. Marking guidelines (e.g. criteria, grade descriptors etc.) are provided at departmental level or provided for individual assignments; please check with the person setting the assignment if you are unsure. Please also see the UCL Student Guide to Assessment and Feedback.</p>
+
+        <h3 id="sec-9-4">9.4 What is your assessor looking for?</h3>
+        <p>UCL's Academic Manual states that to successfully complete your undergraduate degree at UCL, you will have to demonstrate:</p>
+        <ul>
+          <li>A systematic understanding of key aspects of your field of study, including coherent and detailed knowledge, at least some of which is at, or informed by, the forefront of your field of study</li>
+          <li>An ability to use accurately the established techniques of analysis and enquiry within your field of study</li>
+          <li>A conceptual understanding that enables you to devise and sustain arguments and solve problems, using ideas and techniques, some of which are at the forefront of your field of study</li>
+          <li>A conceptual understanding that means you can describe and comment on aspects of current research in the field of study</li>
+          <li>An appreciation of the uncertainty, ambiguity and limits of knowledge</li>
+          <li>An ability to manage your own learning</li>
+          <li>An ability to make use of scholarly reviews and primary sources</li>
+        </ul>
+        <p>Professional institutions will have different or additional learning outcomes.</p>
+
+        <h3 id="sec-9-5">9.5 Your UCL Transcript</h3>
+        <p>Your UCL transcript will show the title, code, credit value and final UCL percentage mark of each module that you take at UCL, as well as your programme and programme route. UCL Student Records provides general advice about the interpretation of UCL grades on an information sheet which is included with each transcript.</p>
+
+        <h3 id="sec-9-6">9.6 Higher Education Achievement Report (HEAR)</h3>
+        <p>In addition to your grade transcript, you will receive a <strong>HEAR</strong>, which provides a single digital record of your achievement at UCL, including activities beyond the traditional transcript or degree result such as your participation in clubs and societies, voluntary activities, education enhancement, prizes etc.</p>
+        <p>Find out more about HEAR on the UCL website.</p>
+
+        <h3 id="sec-9-7">9.7 Award of Different Classes of Honours Degrees</h3>
+        <p>See the percentage of each class of honours degree awarded across the UK, by year, and compare it to the breakdown of honours degrees awarded by UCL. Find out more on the UCL website.</p>
+
+        <h3 id="sec-9-8">9.8 International Equivalencies / Grade Translation</h3>
+        <p>Find out how UK marking compares to other countries on the UCL international grade equivalencies page. This is particularly useful for international students or those applying to positions or programmes abroad.</p>
+      </section>
+
+      <!-- ─── FOOTER ─── -->
+      <footer class="content-footer">
+        <div class="content-footer__inner">
+          <div>
+            <strong>UCL Civil, Environmental &amp; Geomatic Engineering</strong><br>
+            Gower Street · London · WC1E 6BT<br>
+            <a href="mailto:cege.undergraduateenquiries@ucl.ac.uk">cege.undergraduateenquiries@ucl.ac.uk</a>
+          </div>
+          <div>
+            <p>Undergraduate Programme Manual 2025–26</p>
+            <p>© University College London</p>
+          </div>
+        </div>
+      </footer>
+
+    </main><!-- /main content -->
+
+  </div><!-- /layout -->
+
+
+
+
+<!-- ================= EMBEDDED JS ================= -->
+<script>
+/**
+ * UCL CEGE — Undergraduate Programme Manual 2025–26
+ * script.js — All interactive functionality
+ *
+ * Features:
+ *  1. Hamburger (mobile) nav toggle
+ *  2. Sidebar open/close on mobile
+ *  3. TOC expand/collapse (section children)
+ *  4. Active TOC item on scroll (IntersectionObserver)
+ *  5. Keyword search (highlight + result count)
+ *  6. Auto-expand TOC parent when child is active
+ */
+
+(function () {
+  'use strict';
+
+  /* ─────────────────────────────────────────────
+     UTIL: safely get element(s)
+  ───────────────────────────────────────────── */
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+  /* ─────────────────────────────────────────────
+     1. HAMBURGER — mobile nav toggle
+  ───────────────────────────────────────────── */
+  const hamburger = $('#hamburger');
+  const mobileNav = $('#mobileNav');
+
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+      mobileNav.hidden = !open;
+    });
+
+    // Close when a link is clicked
+    $$('a', mobileNav).forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+        mobileNav.hidden = true;
+      });
+    });
+  }
+
+  /* ─────────────────────────────────────────────
+     2. SIDEBAR — mobile open/close
+  ───────────────────────────────────────────── */
+  const sidebar        = $('#sidebar');
+  const sidebarOpenBtn = $('#sidebarOpenBtn');
+  const sidebarOverlay = $('#sidebarOverlay');
+  const sidebarCloseBtn = $('#sidebarToggleMobile');
+
+function openSidebar() {
+  sidebar.classList.add('mobile-open');
+  sidebarOverlay.classList.add('active');
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('mobile-open');
+  sidebarOverlay.classList.remove('active');
+}
+
+  sidebarOpenBtn  && sidebarOpenBtn.addEventListener('click', openSidebar);
+  sidebarOverlay  && sidebarOverlay.addEventListener('click', closeSidebar);
+  sidebarCloseBtn && sidebarCloseBtn.addEventListener('click', closeSidebar);
+
+  // Close sidebar when a TOC link is tapped (mobile)
+  $$('.toc a', sidebar).forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) closeSidebar();
+    });
+  });
+
+  /* ─────────────────────────────────────────────
+     3. TOC EXPAND / COLLAPSE
+  ───────────────────────────────────────────── */
+  $$('.toc-expand').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item     = btn.closest('.toc-item');
+      const children = item.nextElementSibling;
+
+      // Only act if next sibling is .toc-children
+      if (!children || !children.classList.contains('toc-children')) return;
+
+      const isOpen = children.classList.toggle('open');
+      btn.classList.toggle('expanded', isOpen);
+      btn.setAttribute('aria-expanded', isOpen);
+    });
+  });
+
+  /* ─────────────────────────────────────────────
+     4. ACTIVE TOC ITEM — IntersectionObserver
+  ───────────────────────────────────────────── */
+  const allSections = $$('[id]', document.querySelector('#mainContent') || document);
+  const tocLinks    = $$('.toc a');
+
+  // Build a map: sectionId → [ all toc links pointing to it ]
+  const tocMap = {};
+  tocLinks.forEach(link => {
+    const id = (link.getAttribute('href') || '').replace('#', '');
+    if (!tocMap[id]) tocMap[id] = [];
+    tocMap[id].push(link);
+  });
+
+  let lastActive = null;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        if (id === lastActive) return;
+        lastActive = id;
+
+        // Remove active from all
+        tocLinks.forEach(l => l.classList.remove('active'));
+        // Also remove from parent toc-items
+        $$('.toc-item', sidebar).forEach(i => i.classList.remove('active'));
+
+        // Set active on matching links
+        (tocMap[id] || []).forEach(link => {
+          link.classList.add('active');
+
+          // If it's a child link, also activate & expand the parent
+          if (link.classList.contains('toc-child')) {
+            const children = link.closest('.toc-children');
+            if (children) {
+              children.classList.add('open');
+              const parentItem = children.previousElementSibling;
+              if (parentItem) {
+                parentItem.classList.add('active');
+                const btn = parentItem.querySelector('.toc-expand');
+                if (btn) {
+                  btn.classList.add('expanded');
+                  btn.setAttribute('aria-expanded', true);
+                }
+              }
+            }
+          } else {
+            // Top-level: mark the .toc-item
+            const parentItem = link.closest('.toc-item');
+            if (parentItem) parentItem.classList.add('active');
+          }
+
+          // Scroll TOC link into view (sidebar)
+          if (sidebar && typeof link.scrollIntoView === 'function') {
+            // Only scroll if sidebar is visible (desktop) or open (mobile)
+            const sidebarVisible =
+              window.innerWidth > 768 ||
+              sidebar.classList.contains('mobile-open');
+            if (sidebarVisible) {
+              link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+          }
+        });
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -70% 0px',
+    threshold: 0
+  });
+
+  allSections.forEach(section => observer.observe(section));
+
+  /* ─────────────────────────────────────────────
+     5. KEYWORD SEARCH
+  ───────────────────────────────────────────── */
+  const searchInputs     = [
+    document.getElementById('searchInput'),
+    document.getElementById('mobileSearch')
+  ].filter(Boolean);
+
+  const searchResultsBar  = document.getElementById('searchResultsBar');
+  const searchResultsText = document.getElementById('searchResultsText');
+  const searchResultsClose = document.getElementById('searchResultsClose');
+  const searchClearBtn     = document.getElementById('searchClear');
+  const mainContent        = document.getElementById('mainContent');
+
+  // Store original innerHTML of all searchable paragraphs / cells / list items
+  // so we can restore them on clear.
+  const searchableNodes = $$('p, li, td, h2, h3, h4', mainContent);
+
+  // Save original HTML once (we'll restore from this on clear)
+  const originalHTML = searchableNodes.map(n => n.innerHTML);
+
+  /**
+   * Remove all existing search highlights without re-querying the DOM
+   */
+  function clearHighlights() {
+    searchableNodes.forEach((node, i) => {
+      node.innerHTML = originalHTML[i];
+    });
+    if (searchResultsBar) searchResultsBar.hidden = true;
+    if (searchClearBtn)   searchClearBtn.hidden   = true;
+  }
+
+  /**
+   * Highlight all occurrences of `query` inside searchable nodes
+   * Returns the total count of matches
+   */
+  function highlightKeyword(query) {
+    if (!query || query.trim().length < 2) {
+      clearHighlights();
+      return 0;
+    }
+
+    // Restore original HTML first to prevent double-wrapping
+    searchableNodes.forEach((node, i) => {
+      node.innerHTML = originalHTML[i];
+    });
+
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex   = new RegExp(`(${escaped})`, 'gi');
+    let count     = 0;
+
+    searchableNodes.forEach(node => {
+      // Only operate on text, skip code elements (already marked up)
+      const text = node.innerHTML;
+      // Don't highlight inside attribute values or existing mark tags
+      if (regex.test(text)) {
+        node.innerHTML = text.replace(regex, match => {
+          count++;
+          return `<mark class="search-highlight">${match}</mark>`;
+        });
+        // Reset lastIndex
+        regex.lastIndex = 0;
+      }
+    });
+
+    return count;
+  }
+
+  function runSearch(query) {
+    query = (query || '').trim();
+
+    if (query.length < 2) {
+      clearHighlights();
+      return;
+    }
+
+    const count = highlightKeyword(query);
+
+    // Show results bar
+    if (searchResultsBar) {
+      searchResultsBar.hidden = false;
+      searchResultsText.textContent =
+        count > 0
+          ? `${count} match${count !== 1 ? 'es' : ''} found for "${query}"`
+          : `No matches found for "${query}"`;
+    }
+
+    if (searchClearBtn) searchClearBtn.hidden = false;
+
+    // Scroll to first highlight
+    const firstMark = mainContent
+      ? mainContent.querySelector('mark.search-highlight')
+      : null;
+    if (firstMark) {
+      firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  // Debounce helper
+  function debounce(fn, ms) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), ms);
+    };
+  }
+
+  const debouncedSearch = debounce(runSearch, 300);
+
+  searchInputs.forEach(input => {
+    input.addEventListener('input', () => {
+      const query = input.value;
+      // Keep all inputs in sync
+      searchInputs.forEach(other => {
+        if (other !== input) other.value = query;
+      });
+      debouncedSearch(query);
+    });
+
+    // Enter key → immediate
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        runSearch(input.value);
+      }
+      if (e.key === 'Escape') {
+        input.value = '';
+        clearHighlights();
+      }
+    });
+  });
+
+  // Clear buttons
+  [searchClearBtn, searchResultsClose].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      searchInputs.forEach(i => (i.value = ''));
+      clearHighlights();
+    });
+  });
+
+  /* ─────────────────────────────────────────────
+     6. SMOOTH SCROLL OFFSET (account for sticky nav)
+  ───────────────────────────────────────────── */
+  // CSS `scroll-padding-top` handles this in modern browsers.
+  // This is a fallback for browsers that don't support it.
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const id = this.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      e.preventDefault();
+
+      // Always compute manual offset — more reliable on iOS Safari
+      // where scroll-padding-top with CSS variables can be unreliable
+      const navH = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue('--nav-h'),
+        10
+      ) || 60;
+
+      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navH - 12;
+
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+
+      // Update URL hash without triggering jump
+      if (history.pushState) {
+        history.pushState(null, null, '#' + id);
+      }
+    });
+  });
+
+  /* ─────────────────────────────────────────────
+     7. AUTO-EXPAND TOC PARENT FOR DEEP LINKS
+        (if the page loads with a #hash)
+  ───────────────────────────────────────────── */
+  function activateFromHash() {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+
+    const link = document.querySelector(`.toc a[href="#${hash}"]`);
+    if (!link) return;
+
+    if (link.classList.contains('toc-child')) {
+      const children = link.closest('.toc-children');
+      if (children) {
+        children.classList.add('open');
+        const parentItem = children.previousElementSibling;
+        if (parentItem) {
+          const btn = parentItem.querySelector('.toc-expand');
+          if (btn) {
+            btn.classList.add('expanded');
+            btn.setAttribute('aria-expanded', true);
+          }
+        }
+      }
+    }
+  }
+
+  activateFromHash();
+  window.addEventListener('hashchange', activateFromHash);
+
+})();
+
+</script>
+
+</body>
+</html>
